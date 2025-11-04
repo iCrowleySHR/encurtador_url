@@ -86,7 +86,7 @@ A aplicação estará disponível em:
 ### Redirecionar
 **GET** `/urls/{code}`
 
-![IFXvHGaJRd9kmWc](https://github.com/user-attachments/assets/e5aad316-45fb-4b3b-9e9e-5def7ea65a42)
+![Vídeo-sem-título-‐-Feito-com-o-Clipchamp](https://github.com/user-attachments/assets/274a9fb7-ff9b-4739-afe9-4f0f9cc5da78)
 
 
 ### Estatísticas
