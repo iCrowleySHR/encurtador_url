@@ -81,6 +81,8 @@ A aplicação estará disponível em:
 }
 ```
 
+<img width="1118" height="343" alt="image" src="https://github.com/user-attachments/assets/d6932bdc-bb9f-4398-88da-c31baa117c0d" />
+
 ### Redirecionar
 **GET** `/urls/{code}`
 
