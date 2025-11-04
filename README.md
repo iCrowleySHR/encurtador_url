@@ -86,8 +86,14 @@ A aplicação estará disponível em:
 ### Redirecionar
 **GET** `/urls/{code}`
 
+![IFXvHGaJRd9kmWc](https://github.com/user-attachments/assets/e5aad316-45fb-4b3b-9e9e-5def7ea65a42)
+
+
 ### Estatísticas
 **GET** `/urls/stats/{code}`
+
+<img width="608" height="237" alt="image" src="https://github.com/user-attachments/assets/b0e7550f-2820-4673-a945-95e024c2a703" />
+
 
 ---
 
