@@ -81,11 +81,19 @@ A aplicação estará disponível em:
 }
 ```
 
+<img width="1118" height="343" alt="image" src="https://github.com/user-attachments/assets/d6932bdc-bb9f-4398-88da-c31baa117c0d" />
+
 ### Redirecionar
 **GET** `/urls/{code}`
 
+![Vídeo-sem-título-‐-Feito-com-o-Clipchamp](https://github.com/user-attachments/assets/274a9fb7-ff9b-4739-afe9-4f0f9cc5da78)
+
+
 ### Estatísticas
 **GET** `/urls/stats/{code}`
+
+<img width="608" height="237" alt="image" src="https://github.com/user-attachments/assets/b0e7550f-2820-4673-a945-95e024c2a703" />
+
 
 ---
 
