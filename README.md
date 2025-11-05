@@ -1,7 +1,7 @@
 <div align="center">
 
 # Encurtador_URL
-### FastAPI + SQLite + POO (Arquitetura em Camadas)
+### FastAPI + SQLite + POO (Arquitetura em Camadas).
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue.svg)
 ![FastAPI](https://img.shields.io/badge/FastAPI-Framework-green)
