@@ -1,0 +1,44 @@
+name: CI/CD Encurtador URL
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código da aplicação
+        uses: actions/checkout@v4
+
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build e Push da imagem Docker
+        run: |
+          IMAGE=${{ secrets.DOCKER_USERNAME }}/encurtador-url
+          TAG=$(date +%s)
+          docker build -t $IMAGE:$TAG .
+          docker push $IMAGE:$TAG
+          echo "IMAGE=$IMAGE:$TAG" >> $GITHUB_ENV
+
+      - name: Checkout repositório de manifests
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ secrets.DEPLOY_REPO }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: manifests
+
+      - name: Atualizar imagem no deployment.yaml
+        run: |
+          cd manifests
+          sed -i "s|image: .*|image: $IMAGE|" deployment.yaml
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add deployment.yaml
+          git commit -m "Atualiza imagem para $IMAGE" || echo "Sem alterações"
+          git push
