@@ -20,6 +20,89 @@ O projeto foi estruturado com **Programação Orientada a Objetos (POO)** e **ar
 
 ---
 
+<div align="center">
+
+# Encurtador_URL
+### FastAPI + SQLite + POO (Arquitetura em Camadas)
+
+![Python](https://img.shields.io/badge/Python-3.12-blue.svg)
+![FastAPI](https://img.shields.io/badge/FastAPI-Framework-green)
+![SQLite](https://img.shields.io/badge/Database-SQLite-lightgrey)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue)
+![CI/CD](https://img.shields.io/github/actions/workflow/status/icrowleyshr/encurtador_url/ci-cd.yml?label=CI%2FCD&logo=github)
+
+</div>
+
+---
+
+## 📘 Sobre o Projeto
+
+O **URL Shortener API** é uma aplicação desenvolvida com **FastAPI** que permite encurtar URLs, redirecionar acessos e consultar estatísticas de uso.  
+O projeto foi estruturado com **Programação Orientada a Objetos (POO)** e **arquitetura em camadas**, garantindo um código limpo, modular e fácil de manter.
+
+---
+
+##  Integração Contínua (CI/CD)
+
+O projeto conta com um pipeline automatizado utilizando **GitHub Actions**, responsável por:
+
+- Fazer build da imagem Docker a cada push na branch `main`
+- Fazer login no **Docker Hub** com credenciais seguras (armazenadas em `GitHub Secrets`)
+- Enviar (push) a nova imagem para o Docker Hub
+- Atualizar o arquivo `deployment.yaml` em outro repositório de deploy (via token pessoal)
+
+### Arquivo do Workflow (`.github/workflows/ci-cd.yml`)
+
+```yaml
+name: CI/CD Encurtador URL
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código da aplicação
+        uses: actions/checkout@v4
+
+      - name: Login no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build e Push da imagem Docker
+        run: |
+          IMAGE=${{ secrets.DOCKER_USERNAME }}/encurtador-url
+          TAG=$(date +%s)
+          docker build -t $IMAGE:$TAG .
+          docker push $IMAGE:$TAG
+          echo "IMAGE=$IMAGE:$TAG" >> $GITHUB_ENV
+
+      - name: Checkout repositório de manifests
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ secrets.DEPLOY_REPO }}
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          path: manifests
+
+      - name: Atualizar imagem no deployment.yaml
+        run: |
+          cd manifests
+          sed -i "s|image: .*|image: $IMAGE|" deployment.yaml
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add deployment.yaml
+          git commit -m "Atualiza imagem para $IMAGE" || echo "Sem alterações"
+          git push
+```
+
+---
+
 ## Tecnologias Utilizadas
 
 - **FastAPI** — Framework backend moderno e performático  
