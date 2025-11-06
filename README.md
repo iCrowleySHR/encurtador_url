@@ -12,6 +12,13 @@
 </div>
 
 ---
+## Manifests
+
+Você pode encontrar os Manifests da aplicação aqui:
+
+<a href="https://github.com/iCrowleySHR/manifests-encurtador-url/"> https://github.com/iCrowleySHR/manifests-encurtador-url/ </a>
+
+---
 
 ## Sobre o Projeto
 
