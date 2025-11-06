@@ -9,7 +9,6 @@ from app.services.url_service import URLService
 
 router = APIRouter(prefix="/urls", tags=["URLs"])
 
-
 @router.post("/", response_model=URLResponse)
 def create_short_url(data: URLCreate, db: Session = Depends(get_db)):
     repo = URLRepository(db)
