@@ -29,7 +29,7 @@ Você pode encontrar os Manifests da aplicação aqui:
 
 ---
 
-##  Integração Contínua (CI/CD)
+#  Integração Contínua (CI/CD)
 
 O projeto conta com um pipeline automatizado utilizando **GitHub Actions**, responsável por:
 
@@ -156,6 +156,43 @@ um no **Docker Hub** e outro no **GitHub**.
 
 ---
 
+### Resultado Esperado
+
+Após configurar corretamente as **secrets** e gerar os tokens do **Docker Hub** e **GitHub**, o seu **workflow** deve executar com sucesso.
+
+O resultado esperado é:
+
+- O GitHub Actions irá **buildar a imagem Docker**.  
+- Em seguida, fará o **push automático** da imagem para o seu repositório no **Docker Hub**.  
+- Você poderá visualizar a imagem publicada diretamente na sua conta do Docker Hub.
+
+---
+
+#### Em resumo:
+✅ Workflow executando sem erros  
+✅ Imagem gerada e enviada ao Docker Hub  
+✅ Deploy automatizado funcionando corretamente  
+
+---
+
+#### Exemplo de resultado
+
+O GitHub Actions mostrará algo como:
+
+<img width="1899" height="876" alt="image" src="https://github.com/user-attachments/assets/1900f66d-b2ee-4757-8474-2193212bc166" />
+
+E no Docker Hub, você verá a imagem publicada com sucesso:
+
+<img width="1890" height="706" alt="image" src="https://github.com/user-attachments/assets/c73ec888-cdbf-42de-a29a-3d06f0ca757d" />
+
+---
+
+# Desenvolvimento da API
+
+#### A seguir, veja sobre o desenvolvimento da API, execução, rotas e entre outros.
+
+---
+
 ## Tecnologias Utilizadas
 
 - **FastAPI** — Framework backend moderno e performático  
@@ -255,37 +292,6 @@ docker build -t encurtador_url .
 # Rodar o container
 docker run -d -p 8000:8000 encurtador_url
 ```
-
----
-
-### Resultado Esperado
-
-Após configurar corretamente as **secrets** e gerar os tokens do **Docker Hub** e **GitHub**, o seu **workflow** deve executar com sucesso.
-
-O resultado esperado é:
-
-- O GitHub Actions irá **buildar a imagem Docker**.  
-- Em seguida, fará o **push automático** da imagem para o seu repositório no **Docker Hub**.  
-- Você poderá visualizar a imagem publicada diretamente na sua conta do Docker Hub.
-
----
-
-#### Em resumo:
-✅ Workflow executando sem erros  
-✅ Imagem gerada e enviada ao Docker Hub  
-✅ Deploy automatizado funcionando corretamente  
-
----
-
-#### Exemplo de resultado
-
-O GitHub Actions mostrará algo como:
-
-<img width="1899" height="876" alt="image" src="https://github.com/user-attachments/assets/1900f66d-b2ee-4757-8474-2193212bc166" />
-
-E no Docker Hub, você verá a imagem publicada com sucesso:
-
-<img width="1890" height="706" alt="image" src="https://github.com/user-attachments/assets/c73ec888-cdbf-42de-a29a-3d06f0ca757d" />
 
 ---
 
