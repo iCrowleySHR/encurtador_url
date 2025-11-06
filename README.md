@@ -11,12 +11,6 @@
 
 </div>
 
----
-## Manifests
-
-Você pode encontrar os Manifests da aplicação aqui:
-
-<a href="https://github.com/iCrowleySHR/manifests-encurtador-url/"> https://github.com/iCrowleySHR/manifests-encurtador-url/ </a>
 
 ---
 
@@ -24,6 +18,14 @@ Você pode encontrar os Manifests da aplicação aqui:
 
 O **Encurtador_URL** é uma aplicação desenvolvida com **FastAPI** que permite encurtar URLs, redirecionar acessos e consultar estatísticas de uso.  
 O projeto foi estruturado com **Programação Orientada a Objetos (POO)** e **arquitetura em camadas**, garantindo um código limpo, modular e fácil de manter.
+
+
+---
+## Manifests
+
+Você pode encontrar os Manifests da aplicação aqui:
+
+<a href="https://github.com/iCrowleySHR/manifests-encurtador-url/"> https://github.com/iCrowleySHR/manifests-encurtador-url/ </a>
 
 ---
 
