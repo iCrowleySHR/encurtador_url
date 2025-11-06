@@ -13,32 +13,9 @@
 
 ---
 
-## 📘 Sobre o Projeto
+## Sobre o Projeto
 
-O **URL Shortener API** é uma aplicação desenvolvida com **FastAPI** que permite encurtar URLs, redirecionar acessos e consultar estatísticas de uso.  
-O projeto foi estruturado com **Programação Orientada a Objetos (POO)** e **arquitetura em camadas**, garantindo um código limpo, modular e fácil de manter.
-
----
-
-<div align="center">
-
-# Encurtador_URL
-### FastAPI + SQLite + POO (Arquitetura em Camadas)
-
-![Python](https://img.shields.io/badge/Python-3.12-blue.svg)
-![FastAPI](https://img.shields.io/badge/FastAPI-Framework-green)
-![SQLite](https://img.shields.io/badge/Database-SQLite-lightgrey)
-![License](https://img.shields.io/badge/License-MIT-yellow)
-![Docker](https://img.shields.io/badge/Docker-Ready-blue)
-![CI/CD](https://img.shields.io/github/actions/workflow/status/icrowleyshr/encurtador_url/ci-cd.yml?label=CI%2FCD&logo=github)
-
-</div>
-
----
-
-## 📘 Sobre o Projeto
-
-O **URL Shortener API** é uma aplicação desenvolvida com **FastAPI** que permite encurtar URLs, redirecionar acessos e consultar estatísticas de uso.  
+O **Encurtador_URL** é uma aplicação desenvolvida com **FastAPI** que permite encurtar URLs, redirecionar acessos e consultar estatísticas de uso.  
 O projeto foi estruturado com **Programação Orientada a Objetos (POO)** e **arquitetura em camadas**, garantindo um código limpo, modular e fácil de manter.
 
 ---
@@ -102,6 +79,73 @@ jobs:
 ```
 
 ---
+##  Secrets
+
+Antes, para o **Workflow** funcionar corretamente, você deve configurar as **secrets** no repositório, conforme mostrado nas imagens.
+
+Essas *secrets* são variáveis de ambiente protegidas que o GitHub Actions utiliza para autenticar e executar as etapas do pipeline com segurança (por exemplo: deploy, acesso à API, banco de dados, etc.).
+
+###  Como configurar
+1. Acesse o repositório no GitHub.  
+2. Vá em **Settings → Secrets and variables → Actions**.  
+3. Clique em **New repository secret**.  
+4. Adicione as *secrets* listadas abaixo (nomes e valores conforme sua configuração local ou conforme mostrado nas imagens).
+
+<img width="1219" height="817" alt="image" src="https://github.com/user-attachments/assets/69c86503-4b0e-4347-945e-c6bde2a47e56" />
+
+### Docker Hub e GitHub Token
+
+Para que o workflow consiga autenticar e realizar o deploy corretamente, você precisa gerar e configurar dois tipos de tokens:  
+um no **Docker Hub** e outro no **GitHub**.
+
+---
+
+#### Gerar Token no Docker Hub
+
+1. Acesse: [https://hub.docker.com/settings/security](https://hub.docker.com/settings/security)
+2. Vá até **Access Tokens**.
+3. Clique em **New Access Token**.
+4. Dê um nome (ex: `github-actions`) e defina o nível de permissão como **Read & Write**.
+5. Clique em **Create**.
+6. Copie o token gerado e salve-o temporariamente — ele **só aparecerá uma vez**.
+7. No seu repositório no GitHub, adicione:
+   - `DOCKER_USERNAME` → seu nome de usuário no Docker Hub  
+   - `DOCKER_PASSWORD` → o token gerado no Docker Hub
+
+<img width="1899" height="788" alt="image" src="https://github.com/user-attachments/assets/03941e6e-b076-4a46-8b62-593ffb117943" />
+
+
+---
+
+#### Gerar Token Pessoal no GitHub
+
+1. Acesse: [https://github.com/settings/tokens](https://github.com/settings/tokens)
+2. Clique em **Generate new token → Fine-grained token** (ou **Classic token** se preferir).
+3. Dê um nome (ex: `deploy-token`) e defina uma validade (ou deixe sem expiração).
+4. Em **Repository access**, escolha:
+   - **Only select repositories**, e selecione o repositório onde o deploy será feito.
+5. Em **Permissions**, marque:
+   - **Contents → Read and write**
+   - **Actions → Read and write**
+   - **Metadata → Read-only**
+6. Clique em **Generate token**.
+7. Copie o token e adicione no repositório como:
+   - `PERSONAL_TOKEN` → o token pessoal do GitHub.
+
+<img width="1885" height="893" alt="image" src="https://github.com/user-attachments/assets/c42c06c5-68ff-415f-9b6c-2608281520ff" />
+
+---
+
+#### Exemplo final de configuração no GitHub Secrets
+
+| Nome da Secret      | Valor / Origem                            |
+|---------------------|--------------------------------------------|
+| `DOCKER_USERNAME`   | Seu usuário do Docker Hub                  |
+| `DOCKER_PASSWORD`   | Token gerado em https://hub.docker.com     |
+| `PERSONAL_TOKEN`    | Token gerado em https://github.com/settings/tokens |
+| `DEPLOY_REPO`       | Repositório de destino do deploy (ex: `icrowleyshr/manifest_encurtador_url`) |
+
+---
 
 ## Tecnologias Utilizadas
 
@@ -117,7 +161,7 @@ jobs:
 ## Estrutura do Projeto
 
 ```bash
-url_shortener/
+encurtador_url/
 │
 ├── app/
 │   ├── core/              # Configurações centrais (banco, etc)
@@ -202,6 +246,37 @@ docker build -t encurtador_url .
 # Rodar o container
 docker run -d -p 8000:8000 encurtador_url
 ```
+
+---
+
+### Resultado Esperado
+
+Após configurar corretamente as **secrets** e gerar os tokens do **Docker Hub** e **GitHub**, o seu **workflow** deve executar com sucesso.
+
+O resultado esperado é:
+
+- O GitHub Actions irá **buildar a imagem Docker**.  
+- Em seguida, fará o **push automático** da imagem para o seu repositório no **Docker Hub**.  
+- Você poderá visualizar a imagem publicada diretamente na sua conta do Docker Hub.
+
+---
+
+#### Em resumo:
+✅ Workflow executando sem erros  
+✅ Imagem gerada e enviada ao Docker Hub  
+✅ Deploy automatizado funcionando corretamente  
+
+---
+
+#### Exemplo de resultado
+
+O GitHub Actions mostrará algo como:
+
+<img width="1899" height="876" alt="image" src="https://github.com/user-attachments/assets/1900f66d-b2ee-4757-8474-2193212bc166" />
+
+E no Docker Hub, você verá a imagem publicada com sucesso:
+
+<img width="1890" height="706" alt="image" src="https://github.com/user-attachments/assets/c73ec888-cdbf-42de-a29a-3d06f0ca757d" />
 
 ---
 
